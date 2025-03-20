@@ -1,14 +1,34 @@
-import './App.css'
 import React from 'react'
-import AllRoutes from './Routes/AllRoutes'
-function App() {
-  
+import { Route, Routes } from 'react-router-dom'
+import './App.css'
+import Dashboard from './Components/Dashboard'
+import Login from './Components/Login'
+import PrivateRoute from './Routes/PrivateRoute'
 
+function App() {
   return (
-    <>
-      <h1 className='text-3xl text-red-500 font-bold underline'>Hello World</h1>
-      <AllRoutes />
-    </>
+    <div className="App">
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route 
+          path="/admin" 
+          element={
+            <PrivateRoute>
+              <div>Admin Dashboard</div>
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/dashboard" 
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </div>
   )
 }
 
